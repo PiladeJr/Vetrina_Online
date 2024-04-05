@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Registrazione";
+}
+
+<body>
+
+    <h2 id="title">@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+    <div class="row g-0 auth-row min-vh-100">
+        <div class=" d-flex justify-content-center">
+
+            <form action="https://localhost:44330/Home/Index" method="post">
+                <h2 class=" mt-4">Registrati</h2>
+                <div class="d-flex">
+                    <div class="col-49 mt-4">
+                        <label class=" mb-0" for="nome">Nome *</label><br>
+                        <input class="form-control form-control-lg" type="text" name="nome" id="nome"
+                               placeholder="Nome" minlength="3" required />
+                    </div>
+
+                    <div class="col-49 mt-4 offset-1">
+                        <label class=" mb-0" for="cognome">Cognome *</label><br>
+                        <input class="form-control form-control-lg" type="text" name="cognome" id="cognome"
+                               placeholder="Cognome" minlength="3" required />
+                    </div>
+                </div>
+
+
+                <div class="col-12 position-relative mt-4">
+                    <label for="numero">Numero di telefono *</label>
+                    <input class="form-control form-control-lg" type="text" name="numero" id="numero"
+                           placeholder="Numero di telefono" required />
+                </div>
+
+                <div class="col-12 mt-4">
+                    <label class=" mb-0" for="username">Email *</label><br>
+                    <input class="form-control form-control-lg mt-2" type="email" name="username" id="username"
+                           placeholder="Email" required />
+                </div>
+
+                <div class="col-12 position-relative mt-4">
+                    <label class="form-label" for="password">Password *</label>
+                    <input class="form-control form-control-lg" type="password" name="password" id="password"
+                           placeholder="Password" required minlength="8" />
+                </div>
+
+                <div class="col-12 position-relative mt-4">
+                    <label for="password2">Conferma Password *</label>
+                    <input class="form-control form-control-lg" type="password" name="password2" id="password2"
+                           placeholder="Conferma Password" required minlength="8" />
+                </div>
+
+
+                <div class="col-12 mt-4 ">
+                    <input type="submit" class="btn btn-outline-dark w-100  " name="signupSubmit" value="Registrati" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</body
