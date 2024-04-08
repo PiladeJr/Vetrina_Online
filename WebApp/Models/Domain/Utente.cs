@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models.Domain
 {
-    public class Utente
+    public class Utente :IdentityUser
     {
         [Key]
         public Guid IDUtente { get; set; }
