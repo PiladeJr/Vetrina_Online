@@ -19,8 +19,4 @@
     <ProjectReference Include="..\WebApp.Enum\WebApp.Enum.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>
