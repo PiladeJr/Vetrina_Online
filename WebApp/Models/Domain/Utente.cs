@@ -12,13 +12,13 @@ namespace WebApp.Models.Domain
         public bool isAdmin { get; set; }
 
         public Utente() { }
-        public Utente(string nome, string cognome, DateTime dataNascita, string indirizzo, bool IsAdmin)
+        public Utente(string nome, string cognome, DateTime dataNascita, string indirizzo)
         {
             Nome = nome;
             Cognome = cognome;
             DataNascita = dataNascita;
             Indirizzo = indirizzo;
-            isAdmin = IsAdmin;
+            isAdmin = false;
         }
     }
 }
