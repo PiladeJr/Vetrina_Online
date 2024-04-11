@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Carrello";
+}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+<main aria-labelledby="title">
+    <section class="h-100 gradient-custom">
+        <div class="container py-5">
+            <div class="row d-flex justify-content-center my-4">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="mb-0">Carrello - 2 prodotti</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Single item -->
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                    <!-- Image -->
+                                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
+                                             class="w-100" alt="Blue Jeans Jacket" />
+                                        <a href="#!">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </a>
+                                    </div>
+                                    <!-- Image -->
+                                </div>
+
+                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Data -->
+                                    <p><strong>Camicia blu jeans</strong></p>
+                                    <p>Colore: blu</p>
+                                    <p>Taglia: M</p>
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-toggle="tooltip"
+                                            title="Remove item">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <!-- Data -->
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Quantity -->
+                                    <div class="d-flex mb-4" style="max-width: 300px">
+                                        <button class="btn btn-outline-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+
+                                        <div class="form-outline d-flex align-items-center">
+                                            <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control text-center" />
+                                        </div>
+
+                                        <button class="btn btn-outline-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <!-- Price -->
+                                    <p class="text-start text-md-center">
+                                        <strong>€70.00</strong>
+                                    </p>
+                                    <!-- Price -->
+                                </div>
+                            </div>
+                            <!-- Single item -->
+
+                            <hr class="my-4" />
+
+                            <!-- Single item -->
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                                    <!-- Image -->
+                                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
+                                             class="w-100" />
+                                        <a href="#!">
+                                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                                        </a>
+                                    </div>
+                                    <!-- Image -->
+                                </div>
+
+                                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Data -->
+                                    <p><strong>Felpa rossa</strong></p>
+                                    <p>Colore: rosso</p>
+                                    <p>Taglia: M</p>
+
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-toggle="tooltip"
+                                            title="Remove item">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    <!-- Data -->
+                                </div>
+
+                                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                                    <!-- Quantity -->
+                                    <div class="d-flex mb-4" style="max-width: 300px">
+                                        <button class="btn btn-outline-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+
+                                        <div class="form-outline d-flex align-items-center">
+                                            <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control text-center" />
+                                        </div>
+
+                                        <button class="btn btn-outline-dark"
+                                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <!-- Price -->
+                                    <p class="text-start text-md-center">
+                                        <strong>€40.00</strong>
+                                    </p>
+                                    <!-- Price -->
+                                </div>
+                            </div>
+                            <!-- Single item -->
+                        </div>
+                    </div>
+                    <!--
+                        <div class="card mb-4">
+                        <div class="card-body">
+                            <p><strong>Spedizione prevista per:</strong></p>
+                            <p class="mb-0">12.10.2020 - 14.10.2020</p>
+                        </div>
+                    </div>
+                    -->
+                    <!--
+                        <div class="card mb-4 mb-lg-0">
+                        <div class="card-body">
+                            <p><strong>Accettiamo pagamenti con:</strong></p>
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                                 alt="Visa" />
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                                 alt="American Express" />
+                            <img class="me-2" width="45px"
+                                 src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                                 alt="Mastercard" />
+                            <img class="me-2" width="60px"
+                                 src="https://static.helpjuice.com/helpjuice_production/uploads/upload/image/2747/111455/Screen_Shot_2017-05-25_at_4.04.31_PM.png"
+                                 alt="PayPal" />
+                       </div>
+                    </div>
+                    -->
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-header py-3">
+                            <h5 class="mb-0">Info Ordine</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                    Prodotti
+                                    <span>€110.00</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                                    Sconto
+                                    <span>0%</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <div>
+                                        <strong>Totale</strong>
+                                        <strong>
+                                            <p class="mb-0">(IVA inclusa)</p>
+                                        </strong>
+                                    </div>
+                                    <span><strong>€110.00</strong></span>
+                                </li>
+                            </ul>
+
+                            <button type="button" class="btn btn-outline-dark">
+                                Prenota in negozio
+                            </button>
+                            <button type="button" class="btn btn-outline-dark">
+                                Svuota carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
