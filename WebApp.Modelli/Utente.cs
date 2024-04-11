@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Models.Domain
+namespace WebApp.Modelli
 {
-    public class Utente :IdentityUser
+    public class Utente : IdentityUser
     {
         public string Nome { get; set; }
         public string Cognome { get; set; }

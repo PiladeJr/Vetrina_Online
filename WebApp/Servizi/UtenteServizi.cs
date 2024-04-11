@@ -1,54 +1,30 @@
-﻿using WebApp.Data;
-using WebApp.Models.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Modelli;
+using WebApp.Servizi;
+
 namespace WebApp.Servizi
 {
     public class UtenteServizi
     {
-        private readonly ApplicationDbContext _dbContext;
-
-        public UtenteServizi(ApplicationDbContext dbContext)
+        private Utente utente;
+        public UtenteServizi(Utente utente)
         {
-            _dbContext = dbContext;
+            this.utente = utente;
         }
 
-        // Metodo per aggiornare i dettagli dell'utente
-        public void AggiornaUtente(string nome, string cognome, string email, string telefono, DateTime dataNascita, string indirizzo, Guid idUtente)
+        public void CambioPassword(string nuovaPassword)
         {
-            // Esempio di come aggiornare i dettagli dell'utente nel database utilizzando Entity Framework Core
-            // Supponiamo che tu abbia una classe Utente nel tuo DbContext
-            var utente = _dbContext.Utenti.Find(idUtente); // id è l'identificatore unico dell'utente
-            if (utente != null)
-            {
-                utente.Nome = nome;
-                utente.Cognome = cognome;
-                utente.Email = email;
-                utente.PhoneNumber = telefono;
-                utente.DataNascita = dataNascita;
-                utente.Indirizzo = indirizzo;
-
-                _dbContext.SaveChanges();
-            }
-            else
-            {
-                // Utente non trovato, gestisci l'errore di conseguenza
-            }
+            utente.PasswordHash = nuovaPassword;
         }
 
-        // Metodo per cambiare la password dell'utente
-        public void CambiaPassword(string nuovaPassword, Guid idUtente)
+        public void AggiornaUtente(string nuovoNome, string nuovaEmail, DateTime nuovaDataNascita, string nuovoIndirizzo)
         {
-            // Esempio di come cambiare la password dell'utente nel database utilizzando Entity Framework Core
-            // Supponiamo che tu abbia una classe Utente nel tuo DbContext
-            var utente = _dbContext.Utenti.Find(idUtente); // id è l'identificatore unico dell'utente
-            if (utente != null)
-            {
-                utente.PasswordHash = nuovaPassword;
-                _dbContext.SaveChanges();
-            }
-            else
-            {
-                // Utente non trovato, gestisci l'errore di conseguenza
-            }
+            utente.Nome = nuovoNome;
+            utente.Email = nuovaEmail;
+            utente.DataNascita = nuovaDataNascita;
+            utente.Indirizzo = nuovoIndirizzo;
+
+
         }
     }
 }

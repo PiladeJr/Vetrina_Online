@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using WebApp.Models.Domain;
+using WebApp.Modelli;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers

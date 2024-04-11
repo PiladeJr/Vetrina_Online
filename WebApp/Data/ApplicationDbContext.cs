@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebApp.Models.Domain;
+using WebApp.Modelli;
 
 namespace WebApp.Data
 {
@@ -11,7 +11,8 @@ namespace WebApp.Data
         {
         }
         //public DbSet<Lista> Lista_utenti { get; set; }
-        public DbSet<Prodotto> Magazzino { get; set; }
+        public DbSet<Prodotto> Liste { get; set; }
+        public DbSet<Prodotto> Prodotti { get; set; }
         public DbSet<Utente> Utenti { get; set; }
     }
 }

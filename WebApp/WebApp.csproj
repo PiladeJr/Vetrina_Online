@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WebApp.Enum\WebApp.Enum.csproj" />
+    <ProjectReference Include="..\WebApp.Modelli\WebApp.Modelli.csproj" />
   </ItemGroup>
 
 </Project>
