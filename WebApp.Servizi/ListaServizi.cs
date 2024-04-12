@@ -1,43 +1,36 @@
-﻿using System;
+﻿﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using WebApp.Data;
 
 namespace WebApp.Servizi
 {
     public class ListaServizi
     {
-        // Metodo per calcolare il prezzo totale dei prodotti nel carrello
-        // Se la lista dei prodotti è nulla, restituisce 0
-        public Decimal CalcoloPrezzoTotale()
+        private readonly ApplicationDbContext _dbContext;
+
+        public ListaServizi(ApplicationDbContext dbContext)
         {
-            PrezzoTotale = 0; // Azzera il prezzo totale prima di calcolare
-            if (ListaProdotti != null)
-            {
-                foreach (var prodotto in ListaProdotti)
-                {
-                    PrezzoTotale += prodotto.Prezzo;
-                }
-            }
-            return PrezzoTotale;
+            _dbContext = dbContext;
         }
 
-        // Metodo per ottenere la quantità totale dei prodotti nel carrello
-        // Se la lista dei prodotti è nulla, restituisce 0
+        public decimal CalcoloPrezzoTotale()
+        {
+            decimal prezzoTotale = _dbContext.Prodotti.Sum(p => p.Prezzo);
+            return prezzoTotale;
+        }
+
         public int QuantitaProdottiTotale()
         {
-            if (ListaProdotti != null)
-                QuantitaProdotti = ListaProdotti.Count;
-            return QuantitaProdotti;
+            int quantitaProdotti = _dbContext.Prodotti.Count();
+            return quantitaProdotti;
         }
 
-        // Metodo per svuotare il carrello
         public void SvuotaCarrello()
         {
-            {
-                ListaProdotti.Clear();
-            }
+            _dbContext.Prodotti.RemoveRange(_dbContext.Prodotti);
+            _dbContext.SaveChanges();
         }
     }
 }

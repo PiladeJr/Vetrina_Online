@@ -12,7 +12,7 @@ namespace WebApp.Data
         {
         }
         public DbSet<Lista> Lista { get; set; }
-        public DbSet<Prodotto> Prodotto { get; set; }
+        public DbSet<Prodotto> Prodotti { get; set; }
         public DbSet<Utente> Utenti { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)

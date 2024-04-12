@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace WebApp.Modelli
+﻿namespace WebApp.Modelli
 {
     public class Lista
     {
@@ -20,7 +17,5 @@ namespace WebApp.Modelli
             QuantitaProdotti = quantitaProdotti;
             PrezzoTotale = prezzoTotale;
         }
-
-
     }
 }

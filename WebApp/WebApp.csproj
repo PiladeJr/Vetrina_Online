@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebApp.Data\WebApp.Context.csproj" />
     <ProjectReference Include="..\WebApp.Modelli\WebApp.Modelli.csproj" />
+    <ProjectReference Include="..\WebApp.Servizi\WebApp.Servizi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
