@@ -77,6 +77,16 @@ namespace WebApp.Areas.Identity.Pages.Account
             /// </summary>
             [Required]
             [EmailAddress]
+            [Display(Name = "Nome")]
+            public string Nome { get; set; }
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Cognome")]
+            public string Cognome { get; set; }
+
+            [Required]
+            [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -103,6 +113,10 @@ namespace WebApp.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/Views/Vetrina/Index.cshtml");
+            }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -114,6 +128,9 @@ namespace WebApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.Nome = Input.Nome; user.Cognome = Input.Cognome;
+
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
