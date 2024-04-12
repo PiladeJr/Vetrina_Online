@@ -29,11 +29,19 @@ namespace WebApp.Controllers
         {
             return View();
         }
-
+        public IActionResult AreaPersonale()
+        {
+            return View("~/Views/Vetrina/AreaPersonale.cshtml");
+        }
         public IActionResult Carrello()
         {
             return View("~/Views/Vetrina/Carrello.cshtml");
         }
+        public IActionResult Prodotti()
+        {
+            return View("~/Views/Vetrina/Prodotti.cshtml");
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
