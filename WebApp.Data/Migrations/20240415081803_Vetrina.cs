@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Context.Migrations
 {
-    public partial class vetrina : Migration
+    public partial class Vetrina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -180,7 +180,7 @@ namespace WebApp.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Prodotto",
+                name: "Prodotti",
                 columns: table => new
                 {
                     IDProdotto = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -200,15 +200,15 @@ namespace WebApp.Context.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Prodotto", x => x.IDProdotto);
+                    table.PrimaryKey("PK_Prodotti", x => x.IDProdotto);
                     table.ForeignKey(
-                        name: "FK_Prodotto_Lista_IDLista",
+                        name: "FK_Prodotti_Lista_IDLista",
                         column: x => x.IDLista,
                         principalTable: "Lista",
                         principalColumn: "IDLista",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Prodotto_Lista_ListaIDLista",
+                        name: "FK_Prodotti_Lista_ListaIDLista",
                         column: x => x.ListaIDLista,
                         principalTable: "Lista",
                         principalColumn: "IDLista");
@@ -261,13 +261,13 @@ namespace WebApp.Context.Migrations
                 filter: "[Id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prodotto_IDLista",
-                table: "Prodotto",
+                name: "IX_Prodotti_IDLista",
+                table: "Prodotti",
                 column: "IDLista");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prodotto_ListaIDLista",
-                table: "Prodotto",
+                name: "IX_Prodotti_ListaIDLista",
+                table: "Prodotti",
                 column: "ListaIDLista");
         }
 
@@ -289,7 +289,7 @@ namespace WebApp.Context.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Prodotto");
+                name: "Prodotti");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

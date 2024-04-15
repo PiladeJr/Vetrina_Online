@@ -23,12 +23,18 @@ namespace WebApp.Servizi
 
         public Prodotto GetProdottoById(Guid id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException("ID non valido");
+            }
             return _dbContext.Prodotti.FirstOrDefault(p => p.IDProdotto == id);
         }
 
         public void AggiungiProdotto(Prodotto prodotto)
         {
-            _dbContext.Prodotti.Add(prodotto);
+            if (prodotto != null) { 
+                _dbContext.Prodotti.Add(prodotto);
+            }
             _dbContext.SaveChanges();
         }
 

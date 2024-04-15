@@ -239,7 +239,7 @@ namespace WebApp.Context.Migrations
 
                     b.HasIndex("ListaIDLista");
 
-                    b.ToTable("Prodotto");
+                    b.ToTable("Prodotti");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Utente", b =>

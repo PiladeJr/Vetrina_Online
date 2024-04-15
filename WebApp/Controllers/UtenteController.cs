@@ -12,6 +12,7 @@
 //    }
 //}
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
@@ -26,9 +27,9 @@ namespace WebApp.Controllers
         }
         // Azione per aggiornare i dettagli dell'utente
         [HttpPost("aggiorna-utente")]
-        public IActionResult AggiornaUtente(string nome, string cognome, DateTime dataNascita, string indirizzo)
+        public IActionResult AggiornaUtente(string nome, string cognome, string email, string cellulare)
         {
-            _utenteServizi.AggiornaUtente(nome, cognome, dataNascita, indirizzo);
+            _utenteServizi.AggiornaUtente(nome, cognome, email, cellulare);
             return RedirectToAction("Index", "Home"); // Redirect alla home page dopo l'aggiornamento
         }
 

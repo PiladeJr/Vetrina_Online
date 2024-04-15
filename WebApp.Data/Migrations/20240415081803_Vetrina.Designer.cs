@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240410155753_vetrina")]
-    partial class vetrina
+    [Migration("20240415081803_Vetrina")]
+    partial class Vetrina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,7 +241,7 @@ namespace WebApp.Context.Migrations
 
                     b.HasIndex("ListaIDLista");
 
-                    b.ToTable("Prodotto");
+                    b.ToTable("Prodotti");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Utente", b =>
