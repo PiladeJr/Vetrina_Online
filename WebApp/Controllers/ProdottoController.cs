@@ -12,6 +12,7 @@
 //    }
 //}
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Enum;
 using WebApp.Modelli;
 using WebApp.Servizi;
 
@@ -31,6 +32,23 @@ namespace WebApp.Controllers
         {
             var prodotti = _prodottoServizi.GetProdotti();
             return Ok(prodotti);
+        }
+
+        public IActionResult FiltraProdotto(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
+        {
+            IEnumerable<Prodotto> prodottiFiltrati = _prodottoServizi.GetProdotti();
+
+            if (categoria != null)
+            {
+                prodottiFiltrati = prodottiFiltrati.Where(p => p.Categoria == categoria);
+            }
+
+            if (taglia != null)
+            {
+                prodottiFiltrati = prodottiFiltrati.Where(p => p.Taglia == taglia);
+            }
+
+            return Ok(prodottiFiltrati);
         }
 
         [HttpGet("{id}")]
@@ -69,5 +87,7 @@ namespace WebApp.Controllers
             _prodottoServizi.EliminaProdotto(id);
             return NoContent();
         }
+
+        
     }
 }

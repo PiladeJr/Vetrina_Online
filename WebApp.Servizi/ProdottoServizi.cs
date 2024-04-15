@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WebApp.Data;
+using WebApp.Enum;
 using WebApp.Modelli;
 
 namespace WebApp.Servizi
@@ -28,6 +29,22 @@ namespace WebApp.Servizi
                 throw new ArgumentNullException("ID non valido");
             }
             return _dbContext.Prodotti.FirstOrDefault(p => p.IDProdotto == id);
+        }
+        public List<Prodotto> FiltraProdotti(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
+        {
+            IQueryable<Prodotto> prodottiFiltrati = _dbContext.Prodotti;
+
+            if (categoria != null)
+            {
+                prodottiFiltrati = prodottiFiltrati.Where(p => p.Categoria == categoria);
+            }
+
+            if (taglia != null)
+            {
+                prodottiFiltrati = prodottiFiltrati.Where(p => p.Taglia == taglia);
+            }
+
+            return prodottiFiltrati.ToList();
         }
 
         public void AggiungiProdotto(Prodotto prodotto)
