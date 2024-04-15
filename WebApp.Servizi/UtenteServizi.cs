@@ -46,5 +46,6 @@ namespace WebApp.Servizi
                 throw new ArgumentException("Il campo 'nuovoCellulare' non può essere vuoto o null.");
             }
         }
+
     }
 }

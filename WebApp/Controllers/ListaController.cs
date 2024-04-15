@@ -33,5 +33,6 @@ namespace WebApp.Controllers
             _listaServizi.SvuotaCarrello();
             return RedirectToAction("Index", "Home"); // Redirect alla home page dopo lo svuotamento del carrello
         }
+
     }
 }

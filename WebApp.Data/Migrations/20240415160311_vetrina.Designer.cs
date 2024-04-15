@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240415081803_Vetrina")]
-    partial class Vetrina
+    [Migration("20240415160311_vetrina")]
+    partial class vetrina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -214,9 +214,6 @@ namespace WebApp.Context.Migrations
                     b.Property<Guid>("IDLista")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ListaIDLista")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Marchio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -238,8 +235,6 @@ namespace WebApp.Context.Migrations
                     b.HasKey("IDProdotto");
 
                     b.HasIndex("IDLista");
-
-                    b.HasIndex("ListaIDLista");
 
                     b.ToTable("Prodotti");
                 });
@@ -380,23 +375,23 @@ namespace WebApp.Context.Migrations
 
             modelBuilder.Entity("WebApp.Modelli.Lista", b =>
                 {
-                    b.HasOne("WebApp.Modelli.Utente", null)
+                    b.HasOne("WebApp.Modelli.Utente", "UtenteAssociato")
                         .WithOne()
                         .HasForeignKey("WebApp.Modelli.Lista", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("UtenteAssociato");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Prodotto", b =>
                 {
-                    b.HasOne("WebApp.Modelli.Lista", null)
-                        .WithMany()
+                    b.HasOne("WebApp.Modelli.Lista", "listaAssociata")
+                        .WithMany("ListaProdotti")
                         .HasForeignKey("IDLista")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApp.Modelli.Lista", null)
-                        .WithMany("ListaProdotti")
-                        .HasForeignKey("ListaIDLista");
+                    b.Navigation("listaAssociata");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Lista", b =>

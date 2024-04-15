@@ -47,6 +47,18 @@ namespace WebApp.Servizi
             return prodottiFiltrati.ToList();
         }
 
+        public List<Prodotto> RicercaProdottiBarra(string nomeRicerca)
+        {
+            IQueryable<Prodotto> elencoProdotti = _dbContext.Prodotti;
+
+            if (!string.IsNullOrEmpty(nomeRicerca))
+            {
+                elencoProdotti = elencoProdotti.Where(p => p.Nome.Contains(nomeRicerca));
+            }
+
+            return elencoProdotti.ToList();
+        }
+
         public void AggiungiProdotto(Prodotto prodotto)
         {
             if (prodotto != null) { 

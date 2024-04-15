@@ -18,8 +18,8 @@ namespace WebApp.Modelli
         public string Colore { get; set; }
         public string Materiale { get; set; }
         public int Disponibilita { get; set; }
-        //[ForeignKey(nameof(IDLista))]
         public Guid IDLista { get; set; }
+        public virtual Lista listaAssociata { get; set; }
 
         public Prodotto() { }
         public Prodotto(Guid idProdotto, string nome, string descrizione, decimal prezzo, EnumWebApp.Categoria categoria, string marchio,

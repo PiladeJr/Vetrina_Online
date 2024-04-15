@@ -212,9 +212,6 @@ namespace WebApp.Context.Migrations
                     b.Property<Guid>("IDLista")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ListaIDLista")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Marchio")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -236,8 +233,6 @@ namespace WebApp.Context.Migrations
                     b.HasKey("IDProdotto");
 
                     b.HasIndex("IDLista");
-
-                    b.HasIndex("ListaIDLista");
 
                     b.ToTable("Prodotti");
                 });
@@ -378,23 +373,23 @@ namespace WebApp.Context.Migrations
 
             modelBuilder.Entity("WebApp.Modelli.Lista", b =>
                 {
-                    b.HasOne("WebApp.Modelli.Utente", null)
+                    b.HasOne("WebApp.Modelli.Utente", "UtenteAssociato")
                         .WithOne()
                         .HasForeignKey("WebApp.Modelli.Lista", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("UtenteAssociato");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Prodotto", b =>
                 {
-                    b.HasOne("WebApp.Modelli.Lista", null)
-                        .WithMany()
+                    b.HasOne("WebApp.Modelli.Lista", "listaAssociata")
+                        .WithMany("ListaProdotti")
                         .HasForeignKey("IDLista")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApp.Modelli.Lista", null)
-                        .WithMany("ListaProdotti")
-                        .HasForeignKey("ListaIDLista");
+                    b.Navigation("listaAssociata");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Lista", b =>

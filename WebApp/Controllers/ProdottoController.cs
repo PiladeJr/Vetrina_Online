@@ -12,6 +12,7 @@
 //    }
 //}
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Enum;
 using WebApp.Modelli;
 using WebApp.Servizi;
@@ -37,18 +38,14 @@ namespace WebApp.Controllers
         public IActionResult FiltraProdotto(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
         {
             IEnumerable<Prodotto> prodottiFiltrati = _prodottoServizi.GetProdotti();
-
-            if (categoria != null)
-            {
-                prodottiFiltrati = prodottiFiltrati.Where(p => p.Categoria == categoria);
-            }
-
-            if (taglia != null)
-            {
-                prodottiFiltrati = prodottiFiltrati.Where(p => p.Taglia == taglia);
-            }
-
+            _prodottoServizi.FiltraProdotti(categoria, taglia);
             return Ok(prodottiFiltrati);
+        }
+        public IActionResult RicercaProdottiBarra(string nomeRicerca)
+        {
+            IEnumerable<Prodotto> prodottiCercati = _prodottoServizi.GetProdotti();
+            _prodottoServizi.RicercaProdottiBarra(nomeRicerca);
+            return Ok(prodottiCercati);
         }
 
         [HttpGet("{id}")]

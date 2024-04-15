@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Context.Migrations
 {
-    public partial class Vetrina : Migration
+    public partial class vetrina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -195,8 +195,7 @@ namespace WebApp.Context.Migrations
                     Colore = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Materiale = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Disponibilita = table.Column<int>(type: "int", nullable: false),
-                    IDLista = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ListaIDLista = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    IDLista = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -207,11 +206,6 @@ namespace WebApp.Context.Migrations
                         principalTable: "Lista",
                         principalColumn: "IDLista",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Prodotti_Lista_ListaIDLista",
-                        column: x => x.ListaIDLista,
-                        principalTable: "Lista",
-                        principalColumn: "IDLista");
                 });
 
             migrationBuilder.CreateIndex(
@@ -264,11 +258,6 @@ namespace WebApp.Context.Migrations
                 name: "IX_Prodotti_IDLista",
                 table: "Prodotti",
                 column: "IDLista");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Prodotti_ListaIDLista",
-                table: "Prodotti",
-                column: "ListaIDLista");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

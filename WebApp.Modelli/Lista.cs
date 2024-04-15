@@ -3,17 +3,16 @@
     public class Lista
     {
         public Guid IDLista { get; set; }
-        public List<Prodotto> ListaProdotti { get; set; }
+        public ICollection<Prodotto> ListaProdotti { get; set; } = new List<Prodotto>();
         public int QuantitaProdotti { get; set; }
         public decimal PrezzoTotale { get; set; }
-       
-        // [ForeignKey(nameof(Id))]
         public string Id { get; set; } 
+        public virtual Utente UtenteAssociato { get; set; }
 
         public Lista() { }
-        public Lista(int quantitaProdotti, decimal prezzoTotale)
+        public Lista(int quantitaProdotti, decimal prezzoTotale, ICollection<Prodotto> listaProdotti)
         {
-            ListaProdotti = new List<Prodotto>();
+            ListaProdotti = listaProdotti;
             QuantitaProdotti = quantitaProdotti;
             PrezzoTotale = prezzoTotale;
         }

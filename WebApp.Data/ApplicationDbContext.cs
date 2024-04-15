@@ -21,20 +21,19 @@ namespace WebApp.Data
             builder.Entity<Prodotto>()
                 .HasKey(p => p.IDProdotto);
             builder.Entity<Lista>()
-                .HasKey(p => p.IDLista);
+                .HasKey(l => l.IDLista);
             builder.Entity<Utente>()
-                .HasKey(p => p.Id);
+                .HasKey(u => u.Id);
             builder.Entity<Lista>()
-                .HasOne<Utente>()
+                .HasOne(u => u.UtenteAssociato)
                 .WithOne()
                 .HasForeignKey<Lista>(u => u.Id)
                 .OnDelete(DeleteBehavior.Cascade);
             builder.Entity<Prodotto>()
-                .HasOne<Lista>()
-                .WithMany()
+                .HasOne(p => p.listaAssociata)
+                .WithMany(l => l.ListaProdotti)
                 .HasForeignKey(p => p.IDLista)
                 .OnDelete(DeleteBehavior.Cascade);
-
         }
 
     }
