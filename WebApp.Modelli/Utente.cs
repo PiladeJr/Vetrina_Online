@@ -15,24 +15,16 @@ namespace WebApp.Modelli
         [PersonalData]
         [Column(TypeName = "date")]
         public DateTime DataNascita { get; set; }
-        [PersonalData]
-        [Column(TypeName = "nvarchar(100)")]
-        public string Indirizzo { get; set; }
-
         public bool isAdmin { get; set; }
 
         public Utente() { }
-        public Utente(string nome, string cognome, DateTime dataNascita, string indirizzo, bool IsAdmin)
+        public Utente(string nome, string cognome, DateTime dataNascita)
         {
 
             Nome = nome;
             Cognome = cognome;
             DataNascita = dataNascita;
-            Indirizzo = indirizzo;
-            isAdmin = IsAdmin;
+            isAdmin = false;
         }
-
-
-
     }
 }

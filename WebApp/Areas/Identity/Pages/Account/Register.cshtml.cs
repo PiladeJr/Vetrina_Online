@@ -69,12 +69,12 @@ namespace WebApp.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [EmailAddress]
+            [DataType(DataType.Text)]
             [Display(Name = "Nome")]
             public string Nome { get; set; }
 
             [Required]
-            [EmailAddress]
+            [DataType(DataType.Text)]
             [Display(Name = "Cognome")]
             public string Cognome { get; set; }
 
@@ -82,6 +82,14 @@ namespace WebApp.Areas.Identity.Pages.Account
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
+
+            [DataType(DataType.Date)]
+            [Display(Name = "Data di nascita")]
+            public DateTime DataNascita { get; set; }
+
+            [DataType(DataType.PhoneNumber)]
+            [Display(Name = "Cellulare")]
+            public string PhoneNumber { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -121,9 +129,10 @@ namespace WebApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.Nome = Input.Nome; user.Cognome = Input.Cognome;
-
-
+                user.Nome = Input.Nome; 
+                user.Cognome = Input.Cognome;
+                user.DataNascita = Input.DataNascita;
+                user.PhoneNumber = Input.PhoneNumber;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

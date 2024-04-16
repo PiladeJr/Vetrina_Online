@@ -12,7 +12,7 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240415160311_vetrina")]
+    [Migration("20240416090601_vetrina")]
     partial class vetrina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -264,10 +264,6 @@ namespace WebApp.Context.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Indirizzo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
