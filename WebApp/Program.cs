@@ -1,11 +1,5 @@
-using Humanizer.Configuration;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using WebApp.Data;
 using WebApp.Modelli;
 
@@ -20,12 +14,13 @@ namespace WebApp
             var ApplicationDbconnectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             builder.Services.AddControllersWithViews();
-          
+
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ApplicationDbconnectionString, x => x.MigrationsAssembly("WebApp.Context")));
-            
+
             // Aggiungi il supporto per le pagine Razor
             builder.Services.AddRazorPages();
-            builder.Services.ConfigureApplicationCookie(options => {
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
                 options.SlidingExpiration = true;
                 options.LoginPath = "/Account/Login";
@@ -33,7 +28,8 @@ namespace WebApp
                 options.ReturnUrlParameter = "";
             });
 
-            builder.Services.Configure<IdentityOptions>(options => {
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
                 options.User.AllowedUserNameCharacters += " ";
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = false;
@@ -87,5 +83,5 @@ namespace WebApp
             app.Run();
         }
     }
-    
+
 }

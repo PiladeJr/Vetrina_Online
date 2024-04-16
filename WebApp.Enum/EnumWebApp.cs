@@ -1,6 +1,6 @@
 ﻿namespace WebApp.Enum
 {
-   public class EnumWebApp
+    public class EnumWebApp
     {
         public enum Categoria
         {

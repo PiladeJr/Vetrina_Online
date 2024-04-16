@@ -11,8 +11,8 @@ namespace WebApp.Servizi
 
         public void CambioPassword(string nuovaPassword)
         {
-            if(!string.IsNullOrEmpty(nuovaPassword)) 
-            utente.PasswordHash = nuovaPassword;
+            if (!string.IsNullOrEmpty(nuovaPassword))
+                utente.PasswordHash = nuovaPassword;
         }
 
         public void AggiornaUtente(string nuovoNome, string nuovoCognome, string nuovaEmail, string nuovoCellulare)
@@ -21,7 +21,7 @@ namespace WebApp.Servizi
             utente.Nome = nuovoNome;
             utente.Cognome = nuovoCognome;
             utente.PhoneNumber = nuovoCellulare;
-            utente.Email = nuovaEmail;     
+            utente.Email = nuovaEmail;
         }
 
         private void ControlloDati(string nuovoNome, string nuovoCognome, string nuovaEmail, string nuovoCellulare)

@@ -1,7 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using WebApp.Data;
 using WebApp.Enum;
 using WebApp.Modelli;
@@ -61,7 +58,8 @@ namespace WebApp.Servizi
 
         public void AggiungiProdotto(Prodotto prodotto)
         {
-            if (prodotto != null) { 
+            if (prodotto != null)
+            {
                 _dbContext.Prodotti.Add(prodotto);
             }
             _dbContext.SaveChanges();
@@ -84,4 +82,4 @@ namespace WebApp.Servizi
         }
     }
 }
-        
+

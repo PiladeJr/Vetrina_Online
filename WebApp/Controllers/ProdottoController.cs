@@ -1,18 +1,4 @@
-﻿//using Microsoft.AspNetCore.Mvc;
-
-//namespace WebApp.Controllers
-//{
-//    public class ProdottoController : Controller
-//    {
-//        [HttpGet]
-//        public IActionResult Index()
-//        {
-//            return View();
-//        }
-//    }
-//}
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebApp.Enum;
 using WebApp.Modelli;
 using WebApp.Servizi;
@@ -85,6 +71,6 @@ namespace WebApp.Controllers
             return NoContent();
         }
 
-        
+
     }
 }

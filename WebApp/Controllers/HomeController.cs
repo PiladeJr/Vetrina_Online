@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Net;
 using WebApp.Modelli;
 using WebApp.Models;
 
@@ -12,7 +10,7 @@ namespace WebApp.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        
+
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<Utente> _utente;
 
@@ -44,7 +42,7 @@ namespace WebApp.Controllers
         {
             return View("~/Views/Vetrina/Prodotti.cshtml");
         }
-        
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
