@@ -21,6 +21,7 @@ namespace WebApp.Controllers
             return Ok(prodotti);
         }
 
+        [HttpGet]
         public IActionResult FiltraProdotto(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
         {
             IEnumerable<Prodotto> prodottiFiltrati = _prodottoServizi.GetProdotti();

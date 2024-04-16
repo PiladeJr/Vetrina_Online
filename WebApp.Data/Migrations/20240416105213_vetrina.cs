@@ -186,6 +186,7 @@ namespace WebApp.Context.Migrations
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descrizione = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prezzo = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantita = table.Column<int>(type: "int", nullable: false),
                     Categoria = table.Column<int>(type: "int", nullable: false),
                     Marchio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataCreazione = table.Column<DateTime>(type: "datetime2", nullable: false),

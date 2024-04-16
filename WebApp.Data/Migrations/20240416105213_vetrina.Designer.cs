@@ -12,7 +12,7 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240416090601_vetrina")]
+    [Migration("20240416105213_vetrina")]
     partial class vetrina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,6 +228,9 @@ namespace WebApp.Context.Migrations
 
                     b.Property<decimal>("Prezzo")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantita")
+                        .HasColumnType("int");
 
                     b.Property<int>("Taglia")
                         .HasColumnType("int");

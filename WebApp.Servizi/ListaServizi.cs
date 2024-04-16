@@ -1,4 +1,5 @@
 ﻿using WebApp.Data;
+using WebApp.Modelli;
 
 namespace WebApp.Servizi
 {
@@ -26,6 +27,18 @@ namespace WebApp.Servizi
         public void SvuotaCarrello()
         {
             _dbContext.Prodotti.RemoveRange(_dbContext.Prodotti);
+            _dbContext.SaveChanges();
+        }
+
+        public void InvioProdotti(List<Prodotto> prodottiDaInviare)
+        {
+            foreach (var prodotto in prodottiDaInviare)
+            {
+                var prodottiDaRimuovere = _dbContext.Prodotti.Where(p => p.Nome == prodotto.Nome && p.Prezzo == prodotto.Prezzo).Take(prodotto.Quantita);
+                _dbContext.Prodotti.RemoveRange(prodottiDaRimuovere);
+            }
+
+            SvuotaCarrello();
             _dbContext.SaveChanges();
         }
     }

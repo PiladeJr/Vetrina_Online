@@ -8,6 +8,7 @@ namespace WebApp.Modelli
         public string Nome { get; set; }
         public string Descrizione { get; set; }
         public decimal Prezzo { get; set; }
+        public int Quantita { get; set; }
         public EnumWebApp.Categoria Categoria { get; set; }
         public string Marchio { get; set; }
         public DateTime DataCreazione { get; set; }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using WebApp.Modelli;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
@@ -12,26 +14,32 @@ namespace WebApp.Controllers
             _listaServizi = listaServizi;
         }
 
-        // Azione per calcolare il prezzo totale dei prodotti nel carrello
+        [HttpGet]
         public IActionResult CalcolaPrezzoTotale()
         {
             decimal prezzoTotale = _listaServizi.CalcoloPrezzoTotale();
             return View(prezzoTotale);
         }
 
-        // Azione per ottenere la quantità totale dei prodotti nel carrello
+        [HttpGet]
         public IActionResult QuantitaProdottiTotale()
         {
             int quantitaProdotti = _listaServizi.QuantitaProdottiTotale();
             return View(quantitaProdotti);
         }
 
-        // Azione per svuotare il carrello
         [HttpPost]
         public IActionResult SvuotaCarrello()
         {
             _listaServizi.SvuotaCarrello();
             return RedirectToAction("Index", "Home"); // Redirect alla home page dopo lo svuotamento del carrello
+        }
+
+        [HttpPost]
+        public IActionResult InvioProdotti(List<Prodotto> prodottiDaInviare)
+        {
+            _listaServizi.InvioProdotti(prodottiDaInviare);
+            return RedirectToAction("Index", "Home");   
         }
 
     }
