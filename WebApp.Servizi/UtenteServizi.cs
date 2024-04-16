@@ -1,23 +1,37 @@
-﻿using WebApp.Modelli;
+﻿using Microsoft.EntityFrameworkCore;
+using WebApp.Data;
+using WebApp.Modelli;
 namespace WebApp.Servizi
 {
     public class UtenteServizi
     {
-        private Utente utente;
-        public UtenteServizi(Utente utente)
+        private readonly ApplicationDbContext _dbContext;
+
+        public UtenteServizi(ApplicationDbContext dbContext)
         {
-            this.utente = utente;
+            _dbContext = dbContext;
         }
 
-        public void CambioPassword(string nuovaPassword)
+        public bool CambiaPassword(string email, string vecchiaPassword, string nuovaPassword)
         {
-            if (!string.IsNullOrEmpty(nuovaPassword))
-                utente.PasswordHash = nuovaPassword;
+            Utente utente = _dbContext.Utenti.FirstOrDefault(u => u.Email == email);
+
+            if (utente == null)
+                return false;
+
+            if (utente.PasswordHash != vecchiaPassword)
+                return false;
+
+            utente.PasswordHash = nuovaPassword;
+            _dbContext.SaveChanges();
+
+            return true;
         }
 
         public void AggiornaUtente(string nuovoNome, string nuovoCognome, string nuovaEmail, string nuovoCellulare)
         {
             this.ControlloDati(nuovoNome, nuovoCognome, nuovaEmail, nuovoCellulare);
+            Utente utente = _dbContext.Utenti.FirstOrDefault(u => u.Email == nuovaEmail);
             utente.Nome = nuovoNome;
             utente.Cognome = nuovoCognome;
             utente.PhoneNumber = nuovoCellulare;

@@ -9,6 +9,7 @@ namespace WebApp.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
         public DbSet<Lista> Lista { get; set; }
         public DbSet<Prodotto> Prodotti { get; set; }

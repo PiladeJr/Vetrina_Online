@@ -34,10 +34,19 @@ namespace WebApp.Controllers
 
         // Azione per cambiare la password dell'utente
         [HttpPost("cambio-password")]
-        public IActionResult CambioPassword(string nuovaPassword)
+        public async Task<IActionResult> CambioPassword(string email, string vecchiaPassword, string nuovaPassword)
         {
-            _utenteServizi.CambioPassword(nuovaPassword);
-            return RedirectToAction("Index", "Home"); // Redirect alla home page dopo il cambio password
+            bool cambioPasswordRiuscito = _utenteServizi.CambiaPassword(email, vecchiaPassword, nuovaPassword);
+
+            if (cambioPasswordRiuscito)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "La vecchia password è errata.");
+                return View();
+            }
         }
 
     }

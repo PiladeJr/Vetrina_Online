@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApp.Context.Migrations
 {
-    public partial class vetrina : Migration
+    public partial class Vetrina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
