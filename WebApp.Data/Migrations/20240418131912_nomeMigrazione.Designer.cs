@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240416150321_Vetrina")]
-    partial class Vetrina
+    [Migration("20240418131912_nomeMigrazione")]
+    partial class nomeMigrazione
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
