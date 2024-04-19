@@ -75,6 +75,17 @@ Nel nostro progetto, per la sezione dei controller, abbiamo usato HomeController
 Per la parte stilistica, abbiamo deciso di utilizzare le librerie di Bootstrap per modellare l’estetica dell’applicativo. Abbiamo puntato ad uno stile minimale con un'interfaccia avente angoli smussati, con prevalenza dei colori bianco, grigio chiaro e blu scuro. La navbar in alto consente la navigazione all’interno dell’applicativo mentre l’homepage per la visualizzazione dei prodotti è stata strutturata a schede contenenti l’immagine del prodotto, le informazioni principali ed un bottone che consente di aggiungere il prodotto alla lista.
 
 ## Autenticazione
-
+Abbiamo usato Identity di Microsoft come servizio perché offre un'infrastruttura robusta e scalabile per la gestione delle identità degli utenti, semplificando il processo di autenticazione e migliorando la sicurezza del nostro applicativo.
+Gli utenti sono stati invitati a registrarsi sulla piattaforma fornendo informazioni personali, come nome, email e password. Queste informazioni sono state poi gestite dal servizio di identità.
+Gli utenti hanno accesso alla piattaforma tramite l'autenticazione delle loro credenziali. Il servizio di identità verifica le credenziali fornite e genera un token di accesso per gli utenti autorizzati.
+Non è necessaria l’autenticazione per poter interagire con la piattaforma, infatti gli utenti potranno visualizzare l’homepage senza nessuna limitazione, al contrario del carrello che non potrà essere visualizzato se non grazie all’autenticazione.
 
 ## Database
+Nell'ambito di questo progetto, è stato adottato SQL Server come sistema di gestione dei database, integrato con l'utilizzo di DbContext per l'interazione con il database tramite il framework Entity Framework.
+SQL Server offre una solida infrastruttura per la gestione e l'archiviazione dei dati, con funzionalità avanzate per garantire l'affidabilità, la sicurezza e le prestazioni ottimali. DbContext, d'altra parte, funge da ponte tra l'applicazione e il database, facilitando le operazioni di accesso, modifica e manipolazione dei dati attraverso un'interfaccia orientata agli oggetti.
+Questa combinazione di tecnologie fornisce un ambiente robusto e scalabile per la gestione dei dati, consentendo un rapido sviluppo delle applicazioni e un'efficace gestione del ciclo di vita dei dati.
+
+## Sicurezza
+Nel contesto della sicurezza per il nostro applicativo, è stata adottato un approccio olistico per proteggere l'applicazione e i dati sensibili. Per garantire la sicurezza delle credenziali degli utenti, è stata utilizzata la libreria di Identity, che offre robusti meccanismi di autenticazione e autorizzazione, incluso l'hashing delle password per proteggere le informazioni sensibili.
+Inoltre, per prevenire attacchi di tipo SQL injection, sono stati implementati rigorosi controlli di validazione dei dati in ingresso e l'utilizzo di query parametrizzate per evitare l'esecuzione di istruzioni SQL non autorizzate.
+Infine, per gestire l'autenticazione degli utenti e mantenere lo stato delle sessioni in modo sicuro, sono stati utilizzati cookie crittografati, che consentono di mantenere l'integrità dei dati tra il client e il server durante le interazioni dell'utente con l'applicazione. Queste misure combinano tecnologie e pratiche avanzate per garantire un ambiente sicuro e affidabile per l'applicazione e i suoi utenti.
