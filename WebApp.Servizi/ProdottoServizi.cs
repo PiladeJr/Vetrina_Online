@@ -56,7 +56,7 @@ namespace WebApp.Servizi
             return elencoProdotti.ToList();
         }
 
-        public async Task AggiungiProdottoAsync(Guid idUtente, Prodotto prodotto)
+        /*public async Task AggiungiProdottoAsync(Guid idUtente, Prodotto prodotto)
         {
             var utente = await _dbContext.Utenti.FirstOrDefaultAsync(u => u.Id.Equals(idUtente));
             var lista = _dbContext.Lista.FirstOrDefault(l =>
@@ -75,7 +75,7 @@ namespace WebApp.Servizi
                 _dbContext.Prodotti.Add(prodotto);
             }
             _dbContext.SaveChanges();
-        }
+        }*/
 
         public void AggiornaProdotto(Prodotto prodotto)
         {

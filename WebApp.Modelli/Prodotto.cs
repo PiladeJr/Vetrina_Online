@@ -15,15 +15,15 @@ namespace WebApp.Modelli
         public string Colore { get; set; }
         public string Materiale { get; set; }
         public int Disponibilita { get; set; }
-        public Guid IDLista { get; set; }
-        public virtual Lista listaAssociata { get; set; }
+
+        public Guid IDNegozio { get; set; }
+        public virtual Negozio negozioAssociato { get; set; }
 
         public Prodotto() { }
-        public Prodotto(Guid idProdotto, string nome, string descrizione, decimal prezzo, EnumWebApp.Categoria categoria, string marchio,
+        public Prodotto(string nome, string descrizione, decimal prezzo, EnumWebApp.Categoria categoria, string marchio,
                                EnumWebApp.Taglia taglia, string colore,
-                              string materiale, int disponibilita, Guid idLista)
+                              string materiale, int disponibilita, Negozio negozio)
         {
-            IDProdotto = idProdotto;
             Nome = nome;
             Descrizione = descrizione;
             Prezzo = prezzo;
@@ -33,7 +33,7 @@ namespace WebApp.Modelli
             Colore = colore;
             Materiale = materiale;
             Disponibilita = disponibilita;
-            IDLista = idLista;
+            negozioAssociato = negozio;
         }
     }
 }

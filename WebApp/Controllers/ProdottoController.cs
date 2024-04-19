@@ -64,7 +64,7 @@ namespace WebApp.Controllers
         public async Task<IActionResult> AggiungiProdottoAsync([FromBody] Prodotto prodotto)
         {
             //this.User;
-            await _prodottoServizi.AggiungiProdottoAsync(Guid.NewGuid(), prodotto);
+            //await _prodottoServizi.AggiungiProdottoAsync(Guid.NewGuid(), prodotto);
             return CreatedAtAction(nameof(GetProdottoById), new { id = prodotto.IDProdotto }, prodotto);
         }
 

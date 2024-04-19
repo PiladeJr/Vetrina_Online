@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240419143305_nomeMigrazione")]
-    partial class nomeMigrazione
+    [Migration("20240419222341_vetroresina")]
+    partial class vetroresina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,28 +161,37 @@ namespace WebApp.Context.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebApp.Modelli.Lista", b =>
+            modelBuilder.Entity("WebApp.Modelli.Negozio", b =>
                 {
-                    b.Property<Guid>("IDLista")
+                    b.Property<Guid>("IDNegozio")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IDNegozio");
+
+                    b.ToTable("Negozio");
+                });
+
+            modelBuilder.Entity("WebApp.Modelli.Ordine", b =>
+                {
+                    b.Property<Guid>("IDOrdine")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal>("PrezzoTotale")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("QuantitaProdotti")
-                        .HasColumnType("int");
-
-                    b.HasKey("IDLista");
+                    b.HasKey("IDOrdine");
 
                     b.HasIndex("Id")
                         .IsUnique()
                         .HasFilter("[Id] IS NOT NULL");
 
-                    b.ToTable("Lista");
+                    b.ToTable("Ordini");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Prodotto", b =>
@@ -205,7 +214,7 @@ namespace WebApp.Context.Migrations
                     b.Property<int>("Disponibilita")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IDLista")
+                    b.Property<Guid>("IDNegozio")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Marchio")
@@ -231,9 +240,36 @@ namespace WebApp.Context.Migrations
 
                     b.HasKey("IDProdotto");
 
-                    b.HasIndex("IDLista");
+                    b.HasIndex("IDNegozio");
 
                     b.ToTable("Prodotti");
+                });
+
+            modelBuilder.Entity("WebApp.Modelli.ProdottoOrdinato", b =>
+                {
+                    b.Property<Guid>("IDProdottoOrdinato")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IDOrdine")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IDProdotto")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Prezzo")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Quantità")
+                        .HasColumnType("int");
+
+                    b.HasKey("IDProdottoOrdinato");
+
+                    b.HasIndex("IDOrdine");
+
+                    b.HasIndex("IDProdotto");
+
+                    b.ToTable("ProdottiOrdinati");
                 });
 
             modelBuilder.Entity("WebApp.Modelli.Utente", b =>
@@ -366,11 +402,11 @@ namespace WebApp.Context.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApp.Modelli.Lista", b =>
+            modelBuilder.Entity("WebApp.Modelli.Ordine", b =>
                 {
                     b.HasOne("WebApp.Modelli.Utente", "UtenteAssociato")
                         .WithOne()
-                        .HasForeignKey("WebApp.Modelli.Lista", "Id")
+                        .HasForeignKey("WebApp.Modelli.Ordine", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("UtenteAssociato");
@@ -378,18 +414,42 @@ namespace WebApp.Context.Migrations
 
             modelBuilder.Entity("WebApp.Modelli.Prodotto", b =>
                 {
-                    b.HasOne("WebApp.Modelli.Lista", "listaAssociata")
-                        .WithMany("ListaProdotti")
-                        .HasForeignKey("IDLista")
+                    b.HasOne("WebApp.Modelli.Negozio", "negozioAssociato")
+                        .WithMany("Prodotti_Negozio")
+                        .HasForeignKey("IDNegozio")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("listaAssociata");
+                    b.Navigation("negozioAssociato");
                 });
 
-            modelBuilder.Entity("WebApp.Modelli.Lista", b =>
+            modelBuilder.Entity("WebApp.Modelli.ProdottoOrdinato", b =>
                 {
-                    b.Navigation("ListaProdotti");
+                    b.HasOne("WebApp.Modelli.Ordine", "OrdineAssociato")
+                        .WithMany("ProdottiOrdinati")
+                        .HasForeignKey("IDOrdine")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApp.Modelli.Prodotto", "ProdottoAssociato")
+                        .WithMany()
+                        .HasForeignKey("IDProdotto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrdineAssociato");
+
+                    b.Navigation("ProdottoAssociato");
+                });
+
+            modelBuilder.Entity("WebApp.Modelli.Negozio", b =>
+                {
+                    b.Navigation("Prodotti_Negozio");
+                });
+
+            modelBuilder.Entity("WebApp.Modelli.Ordine", b =>
+                {
+                    b.Navigation("ProdottiOrdinati");
                 });
 #pragma warning restore 612, 618
         }
