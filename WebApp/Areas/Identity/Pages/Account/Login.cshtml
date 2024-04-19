@@ -18,8 +18,10 @@
 
                 <div class="col-12 mt-4">
                     <label asp-for="Input.Password" class="form-label"></label>
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" placeholder="Password" required minlength="8" />
+                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" id="password" aria-required="true" placeholder="Password" required minlength="8" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    <span class=" mostraPassword3" onclick="myFunction()"> </span>
+
                 </div>
                 <br />
                 <label asp-for="Input.RememberMe" class="form-label">
@@ -39,6 +41,16 @@
                 </p>
             </form>
 </div>
+        <script>
+            function myFunction() {
+                var x = document.getElementById("password");
+                if (x.type === "password") {
+                    x.type = "text";
+                } else {
+                    x.type = "password";
+                }
+            }
+        </script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

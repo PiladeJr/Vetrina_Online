@@ -49,36 +49,19 @@
                 <label asp-for="Input.Password" class="form-label">Password *</label>
                 <div class="input-group">
                     <input asp-for="Input.Password" class="form-control form-control-lg" type="password" id="password" placeholder="Password" required minlength="8" />
-                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                        <i class="fa fa-eye"></i>
-                    </button>
+                    <span class=" mostraPassword" onclick="myFunction()"> </span>
                 </div>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
 
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    var passwordField = document.getElementById('password');
-                    var toggleButton = document.getElementById('togglePassword');
-
-                    toggleButton.addEventListener('click', function () {
-                        if (passwordField.type === 'password') {
-                            passwordField.type = 'text';
-                            toggleButton.innerHTML = '<i class="fa fa-eye-slash"></i>';
-                        } else {
-                            passwordField.type = 'password';
-                            toggleButton.innerHTML = '<i class="fa fa-eye"></i>';
-                        }
-                    });
-                });
-            </script>
-
-
+           
 
             <div class="col-12 position-relative mt-4">
                 <label asp-for="Input.ConfirmPassword">Conferma Password *</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg" type="password" id="password2" placeholder="Conferma Password" required minlength="8" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                <span class=" mostraPassword2" onclick="myFunction()"> </span>
+
             </div>
 
             
@@ -94,6 +77,27 @@
 
     </div>
 </div>
+
+
+<script>
+    function myFunction() {
+        var x = document.getElementById("password");
+        var y = document.getElementById("password2");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+        x.type = "password";
+
+    }
+        if (y.type === "password"){
+            y.type = "text"
+        } else {
+            y.type = "password";
+
+        }
+    }
+    </script>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
