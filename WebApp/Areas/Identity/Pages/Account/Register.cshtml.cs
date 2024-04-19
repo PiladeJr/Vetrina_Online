@@ -129,7 +129,7 @@ namespace WebApp.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-                user.Nome = Input.Nome; 
+                user.Nome = Input.Nome;
                 user.Cognome = Input.Cognome;
                 user.DataNascita = Input.DataNascita;
                 user.PhoneNumber = Input.PhoneNumber;

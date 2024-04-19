@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using WebApp.Data;
+﻿using WebApp.Data;
 using WebApp.Modelli;
 namespace WebApp.Servizi
 {

@@ -11,12 +11,14 @@
 //        }
 //    }
 //}
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
 {
-
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class UtenteController : Controller
     {
         private readonly UtenteServizi _utenteServizi;

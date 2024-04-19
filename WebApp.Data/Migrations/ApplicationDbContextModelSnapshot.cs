@@ -196,12 +196,6 @@ namespace WebApp.Context.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DataCreazione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataUltimaModifica")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Descrizione")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

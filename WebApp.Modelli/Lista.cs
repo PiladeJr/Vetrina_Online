@@ -3,7 +3,7 @@
     public class Lista
     {
         public Guid IDLista { get; set; }
-        public ICollection<Prodotto> ListaProdotti { get; set; } = new List<Prodotto>();
+        public virtual ICollection<Prodotto> ListaProdotti { get; set; } = new List<Prodotto>();
         public int QuantitaProdotti { get; set; }
         public decimal PrezzoTotale { get; set; }
         public string Id { get; set; }

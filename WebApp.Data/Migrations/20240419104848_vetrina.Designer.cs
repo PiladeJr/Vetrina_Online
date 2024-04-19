@@ -12,8 +12,8 @@ using WebApp.Data;
 namespace WebApp.Context.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240418131912_nomeMigrazione")]
-    partial class nomeMigrazione
+    [Migration("20240419104848_vetrina")]
+    partial class vetrina
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,12 +197,6 @@ namespace WebApp.Context.Migrations
                     b.Property<string>("Colore")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DataCreazione")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DataUltimaModifica")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descrizione")
                         .IsRequired()

@@ -78,6 +78,8 @@
             <div class="col-12 position-relative mt-4">
                 <label asp-for="Input.ConfirmPassword">Conferma Password *</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg" type="password" id="password2" placeholder="Conferma Password" required minlength="8" />
+
+
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 

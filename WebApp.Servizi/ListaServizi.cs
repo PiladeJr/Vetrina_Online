@@ -41,5 +41,27 @@ namespace WebApp.Servizi
             SvuotaCarrello();
             _dbContext.SaveChanges();
         }
+        public void AggiungiProdotto(Prodotto prodotto)
+        {
+
+            //var prodottoEsistente = _carrello.FirstOrDefault(p => p.Nome == prodotto.Nome && p.Prezzo == prodotto.Prezzo);
+            //if (prodottoEsistente != null)
+            //{
+            //    prodottoEsistente.Quantita += prodotto.Quantita;
+            //}
+            //else
+            //{
+            //    _carrello.Add(prodotto);
+            //}
+        }
+
+        public void EliminaProdotto(Guid id)
+        {
+            //var prodottoDaEliminare = _carrello.FirstOrDefault(p => p.Id == id);
+            //if (prodottoDaEliminare != null)
+            //{
+            //    _carrello.Remove(prodottoDaEliminare);
+            //}
+        }
     }
 }

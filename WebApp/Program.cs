@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
@@ -17,16 +18,31 @@ namespace WebApp
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(ApplicationDbconnectionString, x => x.MigrationsAssembly("WebApp.Context")));
 
-            // Aggiungi il supporto per le pagine Razor
             builder.Services.AddRazorPages();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "WebAppVetrinaCookie";
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                    options.SlidingExpiration = true;
+                    options.LoginPath = "/Account/Login";
+                    options.LogoutPath = "/Account/Logout";
+                    options.ReturnUrlParameter = "";
+                });
+            /*
             builder.Services.ConfigureApplicationCookie(options =>
             {
+                options.Cookie.Name = "WebAppVetrinaCookie";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
                 options.SlidingExpiration = true;
                 options.LoginPath = "/Account/Login";
                 options.LogoutPath = "/Account/Logout";
                 options.ReturnUrlParameter = "";
             });
+            */
+
+            builder.Services.AddAuthorization();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {
@@ -57,11 +73,9 @@ namespace WebApp
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -75,7 +89,7 @@ namespace WebApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages(); // Configura le pagine Razor
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

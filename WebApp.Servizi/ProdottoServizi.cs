@@ -56,8 +56,20 @@ namespace WebApp.Servizi
             return elencoProdotti.ToList();
         }
 
-        public void AggiungiProdotto(Prodotto prodotto)
+        public async Task AggiungiProdottoAsync(Guid idUtente, Prodotto prodotto)
         {
+            var utente = await _dbContext.Utenti.FirstOrDefaultAsync(u => u.Id.Equals(idUtente));
+            var lista = _dbContext.Lista.FirstOrDefault(l =>
+            l.ListaProdotti.ToList().Any(p => p.IDProdotto.Equals(prodotto.IDProdotto)));
+            if (lista == null && utente != null)
+            {
+                var newList = new Lista();
+                newList.ListaProdotti.Add(prodotto);
+                newList.UtenteAssociato = utente;
+            }
+            {
+
+            }
             if (prodotto != null)
             {
                 _dbContext.Prodotti.Add(prodotto);

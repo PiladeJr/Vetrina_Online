@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Enum;
 using WebApp.Modelli;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class ProdottoController : Controller
     {
         private readonly ProdottoServizi _prodottoServizi;
@@ -14,6 +17,10 @@ namespace WebApp.Controllers
             _prodottoServizi = prodottoServizi;
         }
 
+        public ActionResult IndexProdotto()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult GetProdotti()
         {
@@ -47,9 +54,10 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AggiungiProdotto([FromBody] Prodotto prodotto)
+        public async Task<IActionResult> AggiungiProdottoAsync([FromBody] Prodotto prodotto)
         {
-            _prodottoServizi.AggiungiProdotto(prodotto);
+            //this.User;
+            await _prodottoServizi.AggiungiProdottoAsync(Guid.NewGuid(), prodotto);
             return CreatedAtAction(nameof(GetProdottoById), new { id = prodotto.IDProdotto }, prodotto);
         }
 

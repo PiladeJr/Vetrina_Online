@@ -1,11 +1,10 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WebApp.Context.Migrations
 {
-    public partial class nomeMigrazione : Migration
+    public partial class vetrina : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -189,8 +188,6 @@ namespace WebApp.Context.Migrations
                     Quantita = table.Column<int>(type: "int", nullable: false),
                     Categoria = table.Column<int>(type: "int", nullable: false),
                     Marchio = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataCreazione = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataUltimaModifica = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Taglia = table.Column<int>(type: "int", nullable: false),
                     Colore = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Materiale = table.Column<string>(type: "nvarchar(max)", nullable: false),

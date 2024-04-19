@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Modelli;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
 {
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class ListaController : Controller
     {
         private readonly ListaServizi _listaServizi;
@@ -13,7 +15,11 @@ namespace WebApp.Controllers
         {
             _listaServizi = listaServizi;
         }
-
+        [HttpGet]
+        public IActionResult IndexLista()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult CalcolaPrezzoTotale()
         {
@@ -39,7 +45,7 @@ namespace WebApp.Controllers
         public IActionResult InvioProdotti(List<Prodotto> prodottiDaInviare)
         {
             _listaServizi.InvioProdotti(prodottiDaInviare);
-            return RedirectToAction("Index", "Home");   
+            return RedirectToAction("Index", "Home");
         }
 
     }
