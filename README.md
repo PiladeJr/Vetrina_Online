@@ -1,7 +1,6 @@
 # Progetto Applicazioni Web e Mobile: StyleHub
 Link per la documentazione: https://onedrive.live.com/edit?id=8AEB47976EEA3C2!127&resid=8AEB47976EEA3C2!127&ithint=file%2cdocx&authkey=!ACCvxwvsSYPrMfo&wdo=2&cid=08aeb47976eea3c2
 ## Membri gruppo
-
 - Lotito Davide [114627]
 - Tommasini Pilade Jr [122086]
 - Di Pietro Leonardo [119025]
@@ -49,14 +48,18 @@ Svilupperemo un'applicazione web per una vetrina d'abbigliamento online fittizia
 
 ## Tipologia di progetto
 La tipologia di progetto scelta è una multipage application, la quale è in grado di separare la logica di presentazione dei dati dalla logica di business.
+La tipologia di progetto scelta è una multipage application, la quale è in grado di separare la logica di presentazione dei dati dalla logica di business.
+Nello specifico una multipage application è un tipo di applicazione web composta da diverse pagine HTML separate, ciascuna dedicata a una parte specifica dell'applicazione.
+A differenza delle single page applications (SPA), dove tutto il contenuto è caricato dinamicamente su una sola pagina, le multipage applications offrono una navigazione più tradizionale attraverso le varie sezioni dell'applicazione.
+Mentre le SPA sono ideali per applicazioni altamente interattive, le multipage applications sono più adatte per progetti con una vasta gamma di funzionalità o che richiedono una migliore ottimizzazione per i motori di ricerca, poiché ogni pagina può essere ottimizzata individualmente.
 
-## Models
+### Models
 I modelli definiti nel nostro progetto sono:
 - **Lista** con i seguenti attributi: IDLista, ListaProdotti, QuantitaProdotti, PrezzoTotale, Id, UtenteAssociato
 - **Prodotto** con i seguenti attributi: IDProdotto, Nome, Descrizione, Prezzo, Quantita, Categoria, Marchio, DataCreazione, DataUltimaModifica, Taglia, Colore, Materiale, Disponibilita, IDLista, listaAssociata
 - **Utente** con i seguenti attributi: Nome, Cognome, DataNascita, isAdmin
 
-## View
+### View
 Le view sono state implementate con l’ausilio della sintassi Razor. Le classi sono così divise:
 - ForgotPassword
 - Login
@@ -68,7 +71,7 @@ Le view sono state implementate con l’ausilio della sintassi Razor. Le classi 
 - Index
 - Prodotti
 
-## Controller
+### Controller
 Nel nostro progetto, per la sezione dei controller, abbiamo usato HomeController per la navigazione all’interno dell’applicativo e successivamente abbiamo aggiunto un controller per ogni modello al fine di poter gestire l’interazione con le singole pagine.
 
 ## Layout e Stile
