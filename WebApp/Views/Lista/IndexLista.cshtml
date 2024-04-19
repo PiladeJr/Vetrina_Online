@@ -31,10 +31,15 @@
                                     <p><strong>Camicia blu jeans</strong></p>
                                     <p>Colore: blu</p>
                                     <p>Taglia: M</p>
-                                    <button type="button" class="btn btn-outline-dark" data-mdb-toggle="tooltip"
+                                    <form asp-controller="Prodotto" asp-action="RimuoviProdottoLista" method="post">
+                                        <button type="submit" class="btn btn-outline-dark">
+                                            Rimuovi
+                                        </button>
+                                    </form>
+                                    @* <button type="button" class="btn btn-outline-dark" data-mdb-toggle="tooltip"
                                             title="Remove item">
                                         <i class="fas fa-trash"></i>
-                                    </button>
+                                    </button> *@
                                     <!-- Data -->
                                 </div>
 
@@ -179,9 +184,11 @@
                             <button type="button" class="btn btn-outline-dark">
                                 Prenota in negozio
                             </button>
-                            <button type="button" class="btn btn-outline-dark">
-                                Svuota carrello
-                            </button>
+                            <form asp-controller="Lista" asp-action="SvuotaCarrello" method="post">
+                                <button type="submit" class="btn btn-outline-dark">
+                                    Svuota carrello
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

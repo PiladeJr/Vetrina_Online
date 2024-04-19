@@ -24,6 +24,8 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
         /// </summary>
         public static string Email => "Email";
 
+        public static string Nome => "NOme";
+
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -71,6 +73,7 @@ namespace WebApp.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
+        public static string NomeNavClass(ViewContext viewContext) => PageNavClass(viewContext, Nome);
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used

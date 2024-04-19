@@ -28,6 +28,7 @@ namespace WebApp.Controllers
         }
         // Azione per aggiornare i dettagli dell'utente
         [HttpPost("aggiorna-utente")]
+        [Route("utente/aggiornautente")]
         public IActionResult AggiornaUtente(string nome, string cognome, string email, string cellulare)
         {
             _utenteServizi.AggiornaUtente(nome, cognome, email, cellulare);
@@ -36,6 +37,7 @@ namespace WebApp.Controllers
 
         // Azione per cambiare la password dell'utente
         [HttpPost("cambio-password")]
+        [Route("utente/passwordutente")]
         public async Task<IActionResult> CambioPassword(string email, string vecchiaPassword, string nuovaPassword)
         {
             bool cambioPasswordRiuscito = _utenteServizi.CambiaPassword(email, vecchiaPassword, nuovaPassword);

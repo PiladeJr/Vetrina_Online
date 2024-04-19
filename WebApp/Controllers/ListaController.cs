@@ -15,19 +15,24 @@ namespace WebApp.Controllers
         {
             _listaServizi = listaServizi;
         }
+
         [HttpGet]
+        [Route("lista/index")]
         public IActionResult IndexLista()
         {
             return View();
         }
-        [HttpGet]
+
+        [HttpPost]
+        [Route("lista/calcolaprezzototale")]
         public IActionResult CalcolaPrezzoTotale()
         {
             decimal prezzoTotale = _listaServizi.CalcoloPrezzoTotale();
             return View(prezzoTotale);
         }
 
-        [HttpGet]
+        [HttpPost]
+        [Route("lista/quantitaprodottitotale")]
         public IActionResult QuantitaProdottiTotale()
         {
             int quantitaProdotti = _listaServizi.QuantitaProdottiTotale();
@@ -35,6 +40,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [Route("lista/svuotacarrello")]
         public IActionResult SvuotaCarrello()
         {
             _listaServizi.SvuotaCarrello();
@@ -42,10 +48,27 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [Route("lista/invioprodotti")]
         public IActionResult InvioProdotti(List<Prodotto> prodottiDaInviare)
         {
             _listaServizi.InvioProdotti(prodottiDaInviare);
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Route("lista/aggiungiprodottolista")]
+        public IActionResult AggiungiProdottoLista(Prodotto nuovoProdotto)
+        {
+            _listaServizi.AggiungiProdottoLista(nuovoProdotto);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Route("lista/eliminaprodottolista")]
+        public IActionResult EliminaProdottoLista(Guid prodottoId)
+        {
+            _listaServizi.EliminaProdottoLista(prodottoId);
+            return RedirectToAction("Index");
         }
 
     }

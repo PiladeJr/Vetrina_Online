@@ -12,6 +12,11 @@ namespace WebApp.Servizi
             _dbContext = dbContext;
         }
 
+        public List<Prodotto> GetListaProdotti()
+        {
+            return _dbContext.Prodotti.ToList();
+        }
+
         public decimal CalcoloPrezzoTotale()
         {
             decimal prezzoTotale = _dbContext.Prodotti.Sum(p => p.Prezzo);
@@ -41,27 +46,37 @@ namespace WebApp.Servizi
             SvuotaCarrello();
             _dbContext.SaveChanges();
         }
-        public void AggiungiProdotto(Prodotto prodotto)
+        public void AggiungiProdottoLista(Prodotto prodottoDaAggiungere)
         {
+            if (prodottoDaAggiungere == null)
+            {
+              this.GetListaProdotti();
+            }
 
-            //var prodottoEsistente = _carrello.FirstOrDefault(p => p.Nome == prodotto.Nome && p.Prezzo == prodotto.Prezzo);
-            //if (prodottoEsistente != null)
-            //{
-            //    prodottoEsistente.Quantita += prodotto.Quantita;
-            //}
-            //else
-            //{
-            //    _carrello.Add(prodotto);
-            //}
+            var prodottoEsistente = _dbContext.Prodotti.FirstOrDefault(p => p.Nome == prodottoDaAggiungere.Nome && p.Prezzo == prodottoDaAggiungere.Prezzo);
+
+            if (prodottoEsistente != null)
+            {
+                prodottoEsistente.Quantita += prodottoDaAggiungere.Quantita;
+            }
+            else
+            {
+                _dbContext.Prodotti.Add(prodottoDaAggiungere);
+            }
+
+            _dbContext.SaveChanges();
         }
 
-        public void EliminaProdotto(Guid id)
+        public void EliminaProdottoLista(Guid prodottoId)
         {
-            //var prodottoDaEliminare = _carrello.FirstOrDefault(p => p.Id == id);
-            //if (prodottoDaEliminare != null)
-            //{
-            //    _carrello.Remove(prodottoDaEliminare);
-            //}
+            var prodottoDaEliminare = _dbContext.Prodotti.Find(prodottoId);
+            if (prodottoDaEliminare != null)
+            {
+                _dbContext.Prodotti.Remove(prodottoDaEliminare);
+                _dbContext.SaveChanges();
+            }
         }
+
+
     }
 }
