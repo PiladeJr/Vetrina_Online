@@ -39,18 +39,19 @@
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
 
+
             <div class="col-12 mt-4">
                 <label asp-for="Input.Email" class="mb-0">Email *</label><br>
-                <input asp-for="Input.Email" class="form-control form-control-lg mt-2" type="email" id="username" placeholder="Email" required />
+                <input asp-for="Input.Email" class="form-control form-control-lg mt-2 input-white-text" type="email" id="username" placeholder="Email" required />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
+
             <div class="col-12 position-relative mt-4">
                 <label asp-for="Input.Password" class="form-label">Password *</label>
-                <div class="input-group">
                     <input asp-for="Input.Password" class="form-control form-control-lg" type="password" id="password" placeholder="Password" required minlength="8" />
-                    <span class=" mostraPassword" onclick="myFunction()"> </span>
-                </div>
+                    <span class=" mostraPassword" > </span>
+               
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
 
@@ -60,7 +61,7 @@
                 <label asp-for="Input.ConfirmPassword">Conferma Password *</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg" type="password" id="password2" placeholder="Conferma Password" required minlength="8" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                <span class=" mostraPassword2" onclick="myFunction()"> </span>
+                <span class=" mostraPasswordConferma" > </span>
 
             </div>
 
@@ -80,23 +81,30 @@
 
 
 <script>
-    function myFunction() {
-        var x = document.getElementById("password");
-        var y = document.getElementById("password2");
-        if (x.type === "password") {
-            x.type = "text";
-        } else {
-        x.type = "password";
+    let item = document.querySelector('.mostraPassword');
+    let pw = document.querySelector('#password');
 
-    }
-        if (y.type === "password"){
-            y.type = "text"
-        } else {
-            y.type = "password";
+    item.addEventListener("click", function () {
+        item.classList.toggle('display-password');
+        let type = pw.getAttribute('type') === 'password' ? 'text' : 'password';
+        pw.setAttribute('type', type);
+    });
 
-        }
-    }
+    let item2 = document.querySelector('.mostraPasswordConferma');
+    let pw2 = document.querySelector('#password2');
+
+    item2.addEventListener("click", function () {
+        item2.classList.toggle('displayPasswordConferma');
+        let type2 = pw2.getAttribute('type') === 'password' ? 'text' : 'password';
+        pw2.setAttribute('type', type2);
+    });
     </script>
+
+
+
+
+
+
 
 
 @section Scripts {

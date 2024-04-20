@@ -20,7 +20,7 @@
                     <label asp-for="Input.Password" class="form-label"></label>
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" id="password" aria-required="true" placeholder="Password" required minlength="8" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    <span class=" mostraPassword3" onclick="myFunction()"> </span>
+                    <span class=" mostraPasswordLogin" > </span>
 
                 </div>
                 <br />
@@ -42,14 +42,14 @@
             </form>
 </div>
         <script>
-            function myFunction() {
-                var x = document.getElementById("password");
-                if (x.type === "password") {
-                    x.type = "text";
-                } else {
-                    x.type = "password";
-                }
-            }
+            let item = document.querySelector('.mostraPasswordLogin');
+            let pw = document.querySelector('#password');
+
+            item.addEventListener("click", function () {
+                item.classList.toggle('displayPasswordLogin');
+                let type = pw.getAttribute('type') === 'password' ? 'text' : 'password';
+                pw.setAttribute('type', type);
+            });
         </script>
 
 @section Scripts {
