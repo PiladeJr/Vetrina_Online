@@ -38,11 +38,11 @@ namespace WebApp.Controllers
             return View("~/Views/Vetrina/AreaPersonale.cshtml");
         }
         [HttpGet]
-        [Route("/Carrello")]
+        [Route("/Lista")]
         [Authorize]
         public IActionResult Carrello()
         {
-            return View("~/Views/Vetrina/Carrello.cshtml");
+            return View("~/Views/Lista/IndexLista.cshtml");
         }
         [AllowAnonymous]
         public IActionResult Prodotti()

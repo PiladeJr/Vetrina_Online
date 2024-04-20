@@ -31,7 +31,8 @@ namespace WebApp.Servizi
 
         public void SvuotaCarrello()
         {
-            _dbContext.Prodotti.RemoveRange(_dbContext.Prodotti);
+
+            _dbContext.ProdottiOrdinati.RemoveRange(_dbContext.ProdottiOrdinati);
             _dbContext.SaveChanges();
         }
 

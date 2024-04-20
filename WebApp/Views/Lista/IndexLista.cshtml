@@ -181,14 +181,17 @@
                                 </li>
                             </ul>
 
-                            <button type="button" class="btn btn-outline-dark">
-                                Prenota in negozio
-                            </button>
                             <form asp-controller="Lista" asp-action="SvuotaCarrello" method="post">
                                 <button type="submit" class="btn btn-outline-dark">
-                                    Svuota carrello
+                                Svuota Carrello
                                 </button>
                             </form>
+                           
+                            <form asp-controller="Lista" asp-action="InvioProdotti" method="post">
+                                <button type="submit" class="btn btn-outline-dark">
+                                    Prenota in negozio
+                                </button>
+                                </form>
                         </div>
                     </div>
                 </div>
