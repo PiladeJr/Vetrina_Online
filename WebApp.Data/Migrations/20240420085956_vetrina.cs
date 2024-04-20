@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -49,6 +50,17 @@ namespace WebApp.Context.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Negozio",
+                columns: table => new
+                {
+                    IDNegozio = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Negozio", x => x.IDNegozio);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,19 +170,18 @@ namespace WebApp.Context.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lista",
+                name: "Ordini",
                 columns: table => new
                 {
-                    IDLista = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    QuantitaProdotti = table.Column<int>(type: "int", nullable: false),
-                    PrezzoTotale = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IDOrdine = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lista", x => x.IDLista);
+                    table.PrimaryKey("PK_Ordini", x => x.IDOrdine);
                     table.ForeignKey(
-                        name: "FK_Lista_AspNetUsers_Id",
+                        name: "FK_Ordini_AspNetUsers_Id",
                         column: x => x.Id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -192,16 +203,43 @@ namespace WebApp.Context.Migrations
                     Colore = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Materiale = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Disponibilita = table.Column<int>(type: "int", nullable: false),
-                    IDLista = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    IDNegozio = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prodotti", x => x.IDProdotto);
                     table.ForeignKey(
-                        name: "FK_Prodotti_Lista_IDLista",
-                        column: x => x.IDLista,
-                        principalTable: "Lista",
-                        principalColumn: "IDLista",
+                        name: "FK_Prodotti_Negozio_IDNegozio",
+                        column: x => x.IDNegozio,
+                        principalTable: "Negozio",
+                        principalColumn: "IDNegozio",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProdottiOrdinati",
+                columns: table => new
+                {
+                    IDProdottoOrdinato = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantità = table.Column<int>(type: "int", nullable: false),
+                    Prezzo = table.Column<double>(type: "float", nullable: false),
+                    IDProdotto = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IDOrdine = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProdottiOrdinati", x => x.IDProdottoOrdinato);
+                    table.ForeignKey(
+                        name: "FK_ProdottiOrdinati_Ordini_IDOrdine",
+                        column: x => x.IDOrdine,
+                        principalTable: "Ordini",
+                        principalColumn: "IDOrdine",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProdottiOrdinati_Prodotti_IDProdotto",
+                        column: x => x.IDProdotto,
+                        principalTable: "Prodotti",
+                        principalColumn: "IDProdotto",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -245,16 +283,26 @@ namespace WebApp.Context.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lista_Id",
-                table: "Lista",
+                name: "IX_Ordini_Id",
+                table: "Ordini",
                 column: "Id",
                 unique: true,
                 filter: "[Id] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Prodotti_IDLista",
+                name: "IX_Prodotti_IDNegozio",
                 table: "Prodotti",
-                column: "IDLista");
+                column: "IDNegozio");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdottiOrdinati_IDOrdine",
+                table: "ProdottiOrdinati",
+                column: "IDOrdine");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProdottiOrdinati_IDProdotto",
+                table: "ProdottiOrdinati",
+                column: "IDProdotto");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -275,16 +323,22 @@ namespace WebApp.Context.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Prodotti");
+                name: "ProdottiOrdinati");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Lista");
+                name: "Ordini");
+
+            migrationBuilder.DropTable(
+                name: "Prodotti");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Negozio");
         }
     }
 }

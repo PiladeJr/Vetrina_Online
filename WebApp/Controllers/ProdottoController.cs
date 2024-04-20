@@ -20,6 +20,7 @@ namespace WebApp.Controllers
         [Route("prodotto/index")]
         public ActionResult IndexProdotto()
         {
+            var prodotti = _prodottoServizi.GetProdotti();
             return View();
         }
         [HttpGet]

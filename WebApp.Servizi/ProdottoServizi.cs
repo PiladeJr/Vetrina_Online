@@ -14,9 +14,9 @@ namespace WebApp.Servizi
             _dbContext = dbContext;
         }
 
-        public List<Prodotto> GetProdotti()
+        public  List<Prodotto>GetProdotti()
         {
-            return _dbContext.Prodotti.ToList();
+            return  _dbContext.Prodotti.ToList();
         }
 
         public Prodotto GetProdottoById(Guid id)
