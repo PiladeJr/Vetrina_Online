@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.Data;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
@@ -7,9 +8,9 @@ namespace WebApp.Controllers
     {
         private readonly OrdineServizi _ordineServizi;
 
-        public OrdineController(OrdineServizi ordineServizi)
+        public OrdineController(ApplicationDbContext _dbcontext)
         {
-            _ordineServizi = ordineServizi;
+            _ordineServizi = new OrdineServizi(_dbcontext);
         }
         public async Task<IActionResult> IndexOrdine()
         {

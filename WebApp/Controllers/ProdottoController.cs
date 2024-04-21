@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Data;
 using WebApp.Enum;
 using WebApp.Modelli;
 using WebApp.Servizi;
@@ -12,9 +13,9 @@ namespace WebApp.Controllers
     {
         private readonly ProdottoServizi _prodottoServizi;
 
-        public ProdottoController(ProdottoServizi prodottoServizi)
+        public ProdottoController(ApplicationDbContext _dbcontext)
         {
-            _prodottoServizi = prodottoServizi;
+            _prodottoServizi = new ProdottoServizi(_dbcontext) ;
         }
         [HttpGet]
         [Route("prodotto/index")]

@@ -14,6 +14,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Data;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
@@ -22,9 +23,9 @@ namespace WebApp.Controllers
     public class UtenteController : Controller
     {
         private readonly UtenteServizi _utenteServizi;
-        public UtenteController(UtenteServizi utenteServizi)
+        public UtenteController(ApplicationDbContext _dbContext)
         {
-            _utenteServizi = utenteServizi;
+            _utenteServizi = new UtenteServizi(_dbContext);
         }
         // Azione per aggiornare i dettagli dell'utente
         [HttpPost("aggiorna-utente")]

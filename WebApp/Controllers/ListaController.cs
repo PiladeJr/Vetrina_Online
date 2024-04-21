@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Data;
 using WebApp.Modelli;
 using WebApp.Servizi;
 
@@ -11,9 +12,9 @@ namespace WebApp.Controllers
     {
         private readonly ListaServizi _listaServizi;
 
-        public ListaController(ListaServizi listaServizi)
+        public ListaController(ApplicationDbContext _dbcontext)
         {
-            _listaServizi = listaServizi;
+            _listaServizi = new ListaServizi(_dbcontext);
         }
 
         [HttpGet]
