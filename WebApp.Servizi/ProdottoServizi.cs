@@ -14,20 +14,20 @@ namespace WebApp.Servizi
             _dbContext = dbContext;
         }
 
-        public  List<Prodotto>GetProdotti()
+        public async Task<List<Prodotto>>GetProdotti()
         {
-            return  _dbContext.Prodotti.ToList();
+            return  await _dbContext.Prodotti.ToListAsync();
         }
 
-        public Prodotto GetProdottoById(Guid id)
+        public async Task<Prodotto> GetProdottoById(Guid id)
         {
             if (id == null)
             {
                 throw new ArgumentNullException("ID non valido");
             }
-            return _dbContext.Prodotti.FirstOrDefault(p => p.IDProdotto == id);
+            return await _dbContext.Prodotti.FirstOrDefaultAsync(p => p.IDProdotto == id);
         }
-        public List<Prodotto> FiltraProdotti(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
+        public async Task<List<Prodotto>> FiltraProdotti(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
         {
             IQueryable<Prodotto> prodottiFiltrati = _dbContext.Prodotti;
 
@@ -41,10 +41,11 @@ namespace WebApp.Servizi
                 prodottiFiltrati = prodottiFiltrati.Where(p => p.Taglia == taglia);
             }
 
-            return prodottiFiltrati.ToList();
+            return await prodottiFiltrati.ToListAsync();
+
         }
 
-        public List<Prodotto> RicercaProdottiBarra(string nomeRicerca)
+        public async Task<List<Prodotto>> RicercaProdottiBarra(string nomeRicerca)
         {
             IQueryable<Prodotto> elencoProdotti = _dbContext.Prodotti;
 
@@ -53,98 +54,73 @@ namespace WebApp.Servizi
                 elencoProdotti = elencoProdotti.Where(p => p.Nome.Contains(nomeRicerca));
             }
 
-            return elencoProdotti.ToList();
+            return await elencoProdotti.ToListAsync();
         }
 
-        /*public async Task AggiungiProdottoAsync(Guid idUtente, Prodotto prodotto)
+        public async Task EliminaProdotto(Guid id)
         {
-            var utente = await _dbContext.Utenti.FirstOrDefaultAsync(u => u.Id.Equals(idUtente));
-            var lista = _dbContext.Lista.FirstOrDefault(l =>
-            l.ListaProdotti.ToList().Any(p => p.IDProdotto.Equals(prodotto.IDProdotto)));
-            if (lista == null && utente != null)
-            {
-                var newList = new Lista();
-                newList.ListaProdotti.Add(prodotto);
-                newList.UtenteAssociato = utente;
-            }
-            {
-
-            }
-            if (prodotto != null)
-            {
-                _dbContext.Prodotti.Add(prodotto);
-            }
-            _dbContext.SaveChanges();
-        }*/
-
-        public void AggiornaProdotto(Prodotto prodotto)
-        {
-            _dbContext.Entry(prodotto).State = EntityState.Modified;
-            _dbContext.SaveChanges();
-        }
-
-        public void EliminaProdotto(Guid id)
-        {
-            var prodotto = _dbContext.Prodotti.Find(id);
+            var prodotto = await _dbContext.Prodotti.FindAsync(id);
             if (prodotto != null)
             {
                 _dbContext.Prodotti.Remove(prodotto);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException("Il prodotto da aggiornare non è stato trovato nel database.");
             }
         }
 
-        //public async Task AddNewMovieAsync(NewMovieVM data)
-        //{
-        //    var newMovie = new Movie()
-        //    {
-        //        Name = data.Name,
-        //        Description = data.Description,
-        //        Price = data.Price,
-        //        ImageURL = data.ImageURL,
-        //        CinemaId = data.CinemaId,
-        //        StartDate = data.StartDate,
-        //        EndDate = data.EndDate,
-        //        MovieCategory = data.MovieCategory,
-        //        ProducerId = data.ProducerId
-        //    };
-        //    await _context.Movies.AddAsync(newMovie);
-        //    await _context.SaveChangesAsync();
+        public async Task AggiungiProdotto(Prodotto prodotto)
+        {
+            if (prodotto!=null)
+            { 
+            var nuovoProdotto = new Prodotto()
+            {
+                Nome = prodotto.Nome,
+                Descrizione = prodotto.Descrizione,
+                Prezzo = prodotto.Prezzo,
+                Categoria = prodotto.Categoria,
+                Marchio = prodotto.Marchio,
+                Taglia = prodotto.Taglia,
+                Colore = prodotto.Colore,
+                Materiale = prodotto.Materiale,
+                Disponibilita = prodotto.Disponibilita,
+                negozioAssociato = prodotto.negozioAssociato
+            };
 
-        //    //Add Movie Actors
-        //    foreach (var actorId in data.ActorIds)
-        //    {
-        //        var newActorMovie = new Actor_Movie()
-        //        {
-        //            MovieId = newMovie.Id,
-        //            ActorId = actorId
-        //        };
-        //        await _context.Actors_Movies.AddAsync(newActorMovie);
-        //    }
-        //    await _context.SaveChangesAsync();
-        //}
+            _dbContext.Prodotti.Add(nuovoProdotto);
+            _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException("Il prodotto da aggiornare non è stato trovato nel database.");
+            }
+        }
+        public async Task AggiornaProdotto(Prodotto prodottoAggiornato)
+        {
+            var prodottoEsistente = _dbContext.Prodotti.FirstOrDefault(p => p.IDProdotto == prodottoAggiornato.IDProdotto);
 
-        //public async Task<Movie> GetMovieByIdAsync(int id)
-        //{
-        //    var movieDetails = await _context.Movies
-        //        .Include(c => c.Cinema)
-        //        .Include(p => p.Producer)
-        //        .Include(am => am.Actors_Movies).ThenInclude(a => a.Actor)
-        //        .FirstOrDefaultAsync(n => n.Id == id);
+            if (prodottoEsistente != null)
+            {
+                prodottoEsistente.Nome = prodottoAggiornato.Nome;
+                prodottoEsistente.Descrizione = prodottoAggiornato.Descrizione;
+                prodottoEsistente.Prezzo = prodottoAggiornato.Prezzo;
+                prodottoEsistente.Categoria = prodottoAggiornato.Categoria;
+                prodottoEsistente.Marchio = prodottoAggiornato.Marchio;
+                prodottoEsistente.Taglia = prodottoAggiornato.Taglia;
+                prodottoEsistente.Colore = prodottoAggiornato.Colore;
+                prodottoEsistente.Materiale = prodottoAggiornato.Materiale;
+                prodottoEsistente.Disponibilita = prodottoAggiornato.Disponibilita;
+                prodottoEsistente.negozioAssociato = prodottoAggiornato.negozioAssociato;
 
-        //    return movieDetails;
-        //}
-
-        //public async Task<NewMovieDropdownsVM> GetNewMovieDropdownsValues()
-        //{
-        //    var response = new NewMovieDropdownsVM()
-        //    {
-        //        Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync(),
-        //        Cinemas = await _context.Cinemas.OrderBy(n => n.Name).ToListAsync(),
-        //        Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync()
-        //    };
-
-        //    return response;
-        //}
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                throw new InvalidOperationException("Il prodotto da aggiornare non è stato trovato nel database.");
+            }
+        }
 
         //public async Task UpdateMovieAsync(NewMovieVM data)
         //{

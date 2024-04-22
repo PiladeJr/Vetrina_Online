@@ -19,41 +19,43 @@ namespace WebApp.Controllers
         }
         [HttpGet]
         [Route("prodotto/index")]
-        public ActionResult IndexProdotto()
+        public async Task<ActionResult> IndexProdotto()
         {
-            var prodotti = _prodottoServizi.GetProdotti();
-            return View();
+            var prodotti = await _prodottoServizi.GetProdotti();
+            return View(prodotti);
         }
+
         [HttpGet]
         [Route("prodotto/getprodotto")]
-        public IActionResult GetProdotti()
+        public async Task<IActionResult> GetProdotti()
         {
-            var prodotti = _prodottoServizi.GetProdotti();
+            var prodotti = await _prodottoServizi.GetProdotti();
             return Ok(prodotti);
         }
 
         [HttpGet]
         [Route("prodotto/filtra")]
-        public IActionResult FiltraProdotto(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
+        public async Task<IActionResult> FiltraProdotto(EnumWebApp.Categoria? categoria, EnumWebApp.Taglia? taglia)
         {
-            IEnumerable<Prodotto> prodottiFiltrati = _prodottoServizi.GetProdotti();
-            _prodottoServizi.FiltraProdotti(categoria, taglia);
+            var prodotti = await _prodottoServizi.GetProdotti();
+            var prodottiFiltrati = await _prodottoServizi.FiltraProdotti(categoria, taglia);
             return Ok(prodottiFiltrati);
         }
         [HttpGet]
         [Route("prodotto/ricercaprodotto")]
-        public IActionResult RicercaProdottiBarra(string nomeRicerca)
+        public async Task<IActionResult> RicercaProdottiBarra(string nomeRicerca)
         {
-            IEnumerable<Prodotto> prodottiCercati = _prodottoServizi.GetProdotti();
-            _prodottoServizi.RicercaProdottiBarra(nomeRicerca);
+            var prodotti = await _prodottoServizi.GetProdotti();
+            var prodottiCercati = await _prodottoServizi.RicercaProdottiBarra(nomeRicerca);
             return Ok(prodottiCercati);
         }
 
+
         [HttpGet("{id}")]
         [Route("prodotto/getprodottobyid")]
-        public IActionResult GetProdottoById(Guid id)
+        public async Task<IActionResult> GetProdottoById(Guid id)
         {
-            var prodotto = _prodottoServizi.GetProdottoById(id);
+            var prodotto = await _prodottoServizi.GetProdottoById(id);
             if (prodotto == null)
             {
                 return NotFound();
@@ -72,22 +74,22 @@ namespace WebApp.Controllers
 
         [HttpPut("{id}")]
         [Route("prodotto/aggiornaprodotto")]
-        public IActionResult AggiornaProdotto(Guid id, [FromBody] Prodotto prodotto)
+        public async Task<IActionResult> AggiornaProdotto(Guid id, [FromBody] Prodotto prodotto)
         {
             if (id != prodotto.IDProdotto)
             {
                 return BadRequest();
             }
 
-            _prodottoServizi.AggiornaProdotto(prodotto);
+            await _prodottoServizi.AggiornaProdotto(prodotto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         [Route("prodotto/eliminaprodotto")]
-        public IActionResult EliminaProdotto(Guid id)
+        public async Task<IActionResult> EliminaProdotto(Guid id)
         {
-            _prodottoServizi.EliminaProdotto(id);
+            await _prodottoServizi.EliminaProdotto(id);
             return NoContent();
         }
 

@@ -16,6 +16,7 @@ namespace WebApp.Data
         public DbSet<Negozio> Negozio { get; set; }
         public DbSet<Ordine> Ordini { get; set; }
         public DbSet<ProdottoOrdinato> ProdottiOrdinati { get; set; }
+        public DbSet<Lista> ListaProdotti { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

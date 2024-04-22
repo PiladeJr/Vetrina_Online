@@ -27,32 +27,6 @@ namespace WebApp.Controllers
         {
             _utenteServizi = new UtenteServizi(_dbContext);
         }
-        // Azione per aggiornare i dettagli dell'utente
-        [HttpPost("aggiorna-utente")]
-        [Route("utente/aggiornautente")]
-        public IActionResult AggiornaUtente(string nome, string cognome, string email, string cellulare)
-        {
-            _utenteServizi.AggiornaUtente(nome, cognome, email, cellulare);
-            return RedirectToAction("Index", "Home"); // Redirect alla home page dopo l'aggiornamento
-        }
-
-        // Azione per cambiare la password dell'utente
-        [HttpPost("cambio-password")]
-        [Route("utente/passwordutente")]
-        public async Task<IActionResult> CambioPassword(string email, string vecchiaPassword, string nuovaPassword)
-        {
-            bool cambioPasswordRiuscito = _utenteServizi.CambiaPassword(email, vecchiaPassword, nuovaPassword);
-
-            if (cambioPasswordRiuscito)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "La vecchia password è errata.");
-                return View();
-            }
-        }
 
     }
 

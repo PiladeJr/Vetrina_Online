@@ -20,18 +20,16 @@ namespace WebApp.Servizi
             return modello;
         }
 
-        //da modificare per prodotto
-        //public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
-        //{
-        //    var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
+        public async Task<List<Ordine>> GetOrderByUser(Utente utente)
+        {
+            var ordini = _dbContext.Ordini.Include(o => o.ProdottiOrdinati).ThenInclude(o => o.ProdottoAssociato).Include(o => o.UtenteAssociato).ToList();
+            if (utente.isAdmin!=true)
+            {
+                ordini = ordini.Where(o => o.UtenteAssociato.Id == utente.Id).ToList();
+            }
+            return ordini;
+        }
 
-        //    if (userRole != "Admin")
-        //    {
-        //        orders = orders.Where(n => n.UserId == userId).ToList();
-        //    }
-
-        //    return orders;
-        //}
         // da modificare per prodotti e lista
         //public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId, string userEmailAddress)
         //{
