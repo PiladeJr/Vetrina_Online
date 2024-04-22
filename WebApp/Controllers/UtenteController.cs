@@ -11,42 +11,21 @@
 //        }
 //    }
 //}
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WebApp.Data;
 using WebApp.Servizi;
 
 namespace WebApp.Controllers
 {
-
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public class UtenteController : Controller
     {
         private readonly UtenteServizi _utenteServizi;
-        public UtenteController(UtenteServizi utenteServizi)
+        public UtenteController(ApplicationDbContext _dbContext)
         {
-            _utenteServizi = utenteServizi;
-        }
-        // Azione per aggiornare i dettagli dell'utente
-        [HttpPost("aggiorna-utente")]
-        public IActionResult AggiornaUtente(string nome, string cognome, string email, string cellulare)
-        {
-            _utenteServizi.AggiornaUtente(nome, cognome, email, cellulare);
-            return RedirectToAction("Index", "Home"); // Redirect alla home page dopo l'aggiornamento
-        }
-
-        // Azione per cambiare la password dell'utente
-        [HttpPost("cambio-password")]
-        public async Task<IActionResult> CambioPassword(string email, string vecchiaPassword, string nuovaPassword)
-        {
-            bool cambioPasswordRiuscito = _utenteServizi.CambiaPassword(email, vecchiaPassword, nuovaPassword);
-
-            if (cambioPasswordRiuscito)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "La vecchia password è errata.");
-                return View();
-            }
+            _utenteServizi = new UtenteServizi(_dbContext);
         }
 
     }

@@ -7,7 +7,7 @@ using WebApp.Models;
 
 namespace WebApp.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
 
@@ -19,25 +19,32 @@ namespace WebApp.Controllers
             _utente = utente;
             _logger = logger;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
-            return View("~/Views/Vetrina/Index.cshtml");
+            return View();
             //ViewData["UtenteID"]=_utente.GetUserId(this.User);
         }
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
         }
+        [HttpGet]
+        [Route("/AreaPersonale")]
+        [Authorize]
         public IActionResult AreaPersonale()
         {
             return View("~/Views/Vetrina/AreaPersonale.cshtml");
         }
+        [HttpGet]
+        [Route("/Lista")]
+        [Authorize]
         public IActionResult Carrello()
         {
-            return View("~/Views/Vetrina/Carrello.cshtml");
+            return View("~/Views/Lista/IndexLista.cshtml");
         }
+        [AllowAnonymous]
         public IActionResult Prodotti()
         {
             return View("~/Views/Vetrina/Prodotti.cshtml");
