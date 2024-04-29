@@ -1,0 +1,67 @@
+﻿@model WebApp.Modelli.Utente
+@using Microsoft.AspNetCore.Identity
+@using WebApp.Modelli
+@inject UserManager<Utente> UserManager
+
+@{
+    ViewData["Title"] = "Area Personale";
+    var user = await UserManager.GetUserAsync(User);
+    bool isAdmin = user?.isAdmin ?? false;
+    var userId = user?.Id;
+    var data = Model.DataNascita.ToShortDateString;
+}
+
+<br />
+<br />
+<br />
+<br />
+<div class="col-md-6">
+    <div class="row">
+        <h1>Benvenuto @Model.Nome</h1>
+        <form asp-action="AreaPersonale" asp-route-id="@Model.Id" id="profile-form" method="post">
+            <div class="col-12 mt-4">
+                <label asp-for="Nome" class="control-label"></label>
+                <span asp-validation-for="Nome" class="text-danger"></span>
+                <input asp-for="Nome" class="form-control" required/>
+            </div>
+
+            <div class="col-12 mt-4">
+                <span asp-validation-for="Cognome" class="text-danger"></span>
+                <label asp-for="Cognome" class="form-label"></label>
+                <input asp-for="Cognome" class="form-control" required/>
+            </div>
+
+            <div class="col-12 mt-4">
+                <label asp-for="DataNascita" class="form-label"></label>
+                <span asp-validation-for="DataNascita" class="text-danger"></span>
+                <span class="form-control">@Model.DataNascita.ToShortDateString()</span>
+            </div>
+
+            <div class="col-12 mt-4">
+                <label asp-for="PhoneNumber" class="form-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" required />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span> 
+            </div>
+            <div class="col-12 mt-4">
+                <label asp-for="Email" class="form-label"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+                @if (isAdmin)
+                {
+                    <input asp-for="Email" class="form-control" readonly />
+                }
+                @if (!isAdmin)
+                {
+                    <input asp-for="Email" class="form-control" required />
+                }
+            </div>
+            <div class="col-12 mt-3">
+                <input id="edit-profile-button" type="submit" class="mt-2 btn btn-outline-dark w-100" name="loginSubmit" value="Modifica Password">
+                <a asp-area="Identity" asp-page="/Account/Logout" />
+            </div>
+            <div class="col-12 mt-3">
+                <input id="edit-profile-button" type="submit" class="mt-2 btn btn-outline-dark w-100" name="loginSubmit" value="ModificaDati">
+                <a asp-controller="Utente" asp-action="AreaPersonale" />
+            </div>
+            
+        </form>
+    </div>
